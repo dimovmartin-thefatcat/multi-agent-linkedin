@@ -9,6 +9,10 @@ __pycache__/
 # VS Code
 .vscode/
 
+# Generated outputs
+outputs/
+linkedin_*.md
+
 # OS
 .DS_Store
 Thumbs.db
