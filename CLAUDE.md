@@ -82,6 +82,15 @@ print(post.body)
 print("  ".join(post.hashtags))
 ```
 
+## Comment Agent
+
+`comment_run(article_text, stance, article_url=None, word_count=80) -> CommentOutput` drafts a reply to someone else's post. The pipeline is Reader → Researcher → Commenter. The comment is a **draft**: post it by hand, because LinkedIn doesn't allow automated commenting from personal accounts.
+
+- Stances: `add_value`, `new_perspective`, `question`, `congrats`
+- Rules: 1–3 specific article points, always positive (never criticise), length set by `word_count` (±10%), no hashtags, written in the `voice_profile.md` voice
+- `article_url` is optional. Tavily extract fails on login-walled LinkedIn pages, and then the pasted `article_text` is used
+- `export_comment_md(reply)` saves the comment to `outputs/comment_<stance>_<timestamp>.md`
+
 ## Key Tool: `tavily_search`
 
 Calls `https://api.tavily.com/search` directly via `requests`. Defined with `@function_tool` wrapping `_tavily_search_impl()`. Test the HTTP layer without the SDK by calling `_tavily_search_impl(query, max_results)` directly.
