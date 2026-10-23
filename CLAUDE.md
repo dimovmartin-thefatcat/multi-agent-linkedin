@@ -76,15 +76,22 @@ class LinkedInOutput(BaseModel):
 4. In the last cell, set `user_query` and `format_type`, then run:
 
 ```python
-post = await manager_run(user_query, format_type)
+post = await manager_run(user_query, format_type, my_thoughts=my_thoughts)
 print(post.hook)
 print(post.body)
 print("  ".join(post.hashtags))
 ```
 
+## Own Thoughts (optional)
+
+Both `manager_run` and `comment_run` take `my_thoughts: str = ""` (bullets or free text). Only the Writer or Commenter receives it.
+
+- Blank: the output is built from research + analysis only (no change in behaviour)
+- Filled: your views become the core of the piece, in the first person, backed by the research. On opinions they win over the analysis; on facts the research still wins. Comments stay positive even if your notes are critical.
+
 ## Comment Agent
 
-`comment_run(article_text, stance, article_url=None, word_count=80) -> CommentOutput` drafts a reply to someone else's post. The pipeline is Reader → Researcher → Commenter. The comment is a **draft**: post it by hand, because LinkedIn doesn't allow automated commenting from personal accounts.
+`comment_run(article_text, stance, article_url=None, word_count=80, my_thoughts="") -> CommentOutput` drafts a reply to someone else's post. The pipeline is Reader → Researcher → Commenter. The comment is a **draft**: post it by hand, because LinkedIn doesn't allow automated commenting from personal accounts.
 
 - Stances: `add_value`, `new_perspective`, `question`, `congrats`
 - Rules: 1–3 specific article points, always positive (never criticise), length set by `word_count` (±10%), no hashtags, written in the `voice_profile.md` voice
