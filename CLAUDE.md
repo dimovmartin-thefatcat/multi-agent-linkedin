@@ -82,6 +82,8 @@ print(post.body)
 print("  ".join(post.hashtags))
 ```
 
+To publish, run `export_post_text(post)`. It saves a plain-text `outputs/post_<format>_<timestamp>.txt` and copies it to the clipboard, ready to paste into LinkedIn by hand. LinkedIn doesn't allow automated posting from personal accounts, and the LinkedIn MCP has no post tool.
+
 ## Own Thoughts (optional)
 
 Both `manager_run` and `comment_run` take `my_thoughts: str = ""` (bullets or free text). Only the Writer or Commenter receives it.
